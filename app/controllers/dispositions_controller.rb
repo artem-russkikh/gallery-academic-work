@@ -1,4 +1,6 @@
 class DispositionsController < ApplicationController
+  autocomplete :room, :title
+  autocomplete :painting, :title
   before_action :set_disposition, only: [:show, :edit, :update, :destroy]
 
   # GET /dispositions

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :dispositions
+  resources :dispositions do
+    get :autocomplete_room_title, on: :collection
+    get :autocomplete_painting_title, on: :collection
+  end
   resources :rooms
   resources :paintings do
     get :autocomplete_user_email, on: :collection
