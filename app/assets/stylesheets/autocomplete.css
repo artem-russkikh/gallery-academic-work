@@ -1,3 +1,6 @@
+.ui-helper-hidden-accessible {
+  display: none;
+}
 
 /*jQuery UI autocomplete for bootstrap*/
 .ui-autocomplete {

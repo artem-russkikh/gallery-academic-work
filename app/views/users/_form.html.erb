@@ -81,7 +81,7 @@
       <%= f.label :rank, class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
         <%= f.hidden_field :rank_id %>
-        <%= autocomplete_field_tag 'rank_title', '', autocomplete_rank_title_users_path, id_element: '#user_rank_id' %>
+        <%= autocomplete_field_tag 'rank_title', @user.rank.title, autocomplete_rank_title_users_path, id_element: '#user_rank_id' %>
       </div>
 
   </div>
