@@ -1,0 +1,17 @@
+<div class="page-header">
+  <%= link_to ranks_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Назад
+  <% end %>
+  <%= link_to edit_rank_path(@rank), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Редактировать
+  <% end %>
+  <h1>Просмотр rank</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Title:</dt>
+  <dd><%= @rank.title %></dd>
+
+</dl>
