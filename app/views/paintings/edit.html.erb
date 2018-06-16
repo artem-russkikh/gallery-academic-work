@@ -1,0 +1,13 @@
+<div class="page-header">
+  <%= link_to paintings_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Назад
+  <% end %>
+  <%= link_to @painting, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Показать
+  <% end %>
+  <h1>Редактирование painting</h1>
+</div>
+
+<%= render 'form' %>

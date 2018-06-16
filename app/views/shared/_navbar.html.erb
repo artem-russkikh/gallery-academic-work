@@ -22,6 +22,10 @@
         <li class="<%= 'active' if controller.controller_name == 'users' %>">
           <%= link_to 'Пользователи', users_path %>
         </li>
+
+        <li class="<%= 'active' if controller.controller_name == 'paintings' %>">
+          <%= link_to 'Картины', paintings_path %>
+        </li>
       </ul>
     </div>
   </div>

@@ -1,0 +1,23 @@
+<div class="page-header">
+  <%= link_to paintings_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Назад
+  <% end %>
+  <%= link_to edit_painting_path(@painting), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Редактировать
+  <% end %>
+  <h1>Просмотр painting</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Title:</dt>
+  <dd><%= @painting.title %></dd>
+
+  <dt>Painting kind:</dt>
+  <dd><%= @painting.painting_kind %></dd>
+
+  <dt>User:</dt>
+  <dd><%= @painting.user %></dd>
+
+</dl>

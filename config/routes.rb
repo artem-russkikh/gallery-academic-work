@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :paintings do
+    get :autocomplete_user_email, on: :collection
+    get :autocomplete_painting_kind_title, on: :collection
+  end
   resources :users do
     get :autocomplete_rank_title, on: :collection
   end
