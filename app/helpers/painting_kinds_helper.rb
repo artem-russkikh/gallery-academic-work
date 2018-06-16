@@ -1,0 +1,2 @@
+module PaintingKindsHelper
+end
