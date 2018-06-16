@@ -1,0 +1,9 @@
+<div class="page-header">
+  <%%= link_to <%= index_helper %>_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Назад
+  <%% end %>
+  <h1>Новый <%= singular_table_name %></h1>
+</div>
+
+<%%= render 'form' %>

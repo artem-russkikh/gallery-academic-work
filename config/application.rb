@@ -28,6 +28,9 @@ module Gallery
     # the framework and any gems in your application.
 
     # Don't generate system test files.
-    config.generators.system_tests = nil
+    config.generators do |g|
+      g.system_tests false
+      g.scaffold_stylesheet false
+    end
   end
 end
