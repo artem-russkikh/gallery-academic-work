@@ -23,7 +23,7 @@
 class User < ApplicationRecord
   attr_accessor :password
 
-  enum role: { painter: 0, manager: 1, admin: 2 }
+  enum role: { painter: 502, manager: 501, admin: 500 }
 
   belongs_to :rank, optional: true
   has_many :paintings

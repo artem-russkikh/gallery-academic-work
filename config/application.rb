@@ -32,5 +32,8 @@ module Gallery
       g.system_tests false
       g.scaffold_stylesheet false
     end
+
+    config.paths.add File.join("app", "services"), glob: File.join("**", "*.rb")
+    config.autoload_paths += Dir[Rails.root.join("app", "services", "*")]
   end
 end
