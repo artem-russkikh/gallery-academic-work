@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :rooms
   resources :paintings do
     get :autocomplete_user_email, on: :collection
     get :autocomplete_painting_kind_title, on: :collection
