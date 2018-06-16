@@ -18,6 +18,10 @@
         <li class="<%= 'active' if controller.controller_name == 'painting_kinds' %>">
           <%= link_to 'Виды картин', painting_kinds_path %>
         </li>
+
+        <li class="<%= 'active' if controller.controller_name == 'users' %>">
+          <%= link_to 'Пользователи', users_path %>
+        </li>
       </ul>
     </div>
   </div>

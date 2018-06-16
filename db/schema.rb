@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_044426) do
+ActiveRecord::Schema.define(version: 2018_06_16_045239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,4 +27,20 @@ ActiveRecord::Schema.define(version: 2018_06_16_044426) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "encrypted_password"
+    t.string "ldap_id"
+    t.integer "role"
+    t.string "name"
+    t.string "surname"
+    t.string "middle_name"
+    t.integer "age"
+    t.bigint "rank_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rank_id"], name: "index_users_on_rank_id"
+  end
+
+  add_foreign_key "users", "ranks"
 end
