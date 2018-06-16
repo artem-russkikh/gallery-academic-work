@@ -1,0 +1,23 @@
+<div class="page-header">
+  <%= link_to dispositions_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Назад
+  <% end %>
+  <%= link_to edit_disposition_path(@disposition), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Редактировать
+  <% end %>
+  <h1>Просмотр disposition</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Painting:</dt>
+  <dd><%= @disposition.painting %></dd>
+
+  <dt>Room:</dt>
+  <dd><%= @disposition.room %></dd>
+
+  <dt>Reproduction:</dt>
+  <dd><%= @disposition.reproduction %></dd>
+
+</dl>

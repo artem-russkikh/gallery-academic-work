@@ -11,4 +11,6 @@
 #
 
 class Room < ApplicationRecord
+  has_many :dispositions
+  has_many :paintings, through: :dispositions
 end

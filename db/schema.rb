@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_053958) do
+ActiveRecord::Schema.define(version: 2018_06_16_054110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "dispositions", force: :cascade do |t|
+    t.bigint "painting_id"
+    t.bigint "room_id"
+    t.boolean "reproduction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["painting_id"], name: "index_dispositions_on_painting_id"
+    t.index ["room_id"], name: "index_dispositions_on_room_id"
+  end
 
   create_table "painting_kinds", force: :cascade do |t|
     t.string "title"
@@ -60,6 +70,8 @@ ActiveRecord::Schema.define(version: 2018_06_16_053958) do
     t.index ["rank_id"], name: "index_users_on_rank_id"
   end
 
+  add_foreign_key "dispositions", "paintings"
+  add_foreign_key "dispositions", "rooms"
   add_foreign_key "paintings", "painting_kinds"
   add_foreign_key "paintings", "users"
   add_foreign_key "users", "ranks"

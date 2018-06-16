@@ -30,6 +30,10 @@
         <li class="<%= 'active' if controller.controller_name == 'rooms' %>">
           <%= link_to 'Залы', rooms_path %>
         </li>
+
+        <li class="<%= 'active' if controller.controller_name == 'dispositions' %>">
+          <%= link_to 'Размещения', dispositions_path %>
+        </li>
       </ul>
     </div>
   </div>

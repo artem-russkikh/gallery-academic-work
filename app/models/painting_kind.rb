@@ -9,4 +9,5 @@
 #
 
 class PaintingKind < ApplicationRecord
+  has_many :paintings
 end

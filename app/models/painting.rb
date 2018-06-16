@@ -18,4 +18,7 @@
 class Painting < ApplicationRecord
   belongs_to :painting_kind
   belongs_to :user
+
+  has_many :dispositions
+  has_many :rooms, through: :dispositions
 end

@@ -25,5 +25,6 @@ class User < ApplicationRecord
 
   enum role: { painter: 0, manager: 1, admin: 2 }
 
-  belongs_to :rank
+  belongs_to :rank, optional: true
+  has_many :paintings
 end
