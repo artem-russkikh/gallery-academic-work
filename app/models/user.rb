@@ -14,16 +14,20 @@
 #  rank_id            :bigint(8)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  deleted_at         :datetime
 #
 # Indexes
 #
-#  index_users_on_rank_id  (rank_id)
+#  index_users_on_deleted_at  (deleted_at)
+#  index_users_on_rank_id     (rank_id)
 #
 
 class User < ApplicationRecord
   attr_accessor :password
 
   enum role: { painter: 502, manager: 501, admin: 500 }
+
+  acts_as_paranoid
 
   belongs_to :rank, optional: true
   has_many :paintings

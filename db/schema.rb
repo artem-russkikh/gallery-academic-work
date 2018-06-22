@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_054110) do
+ActiveRecord::Schema.define(version: 2018_06_22_214102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2018_06_16_054110) do
     t.boolean "reproduction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_dispositions_on_deleted_at"
     t.index ["painting_id"], name: "index_dispositions_on_painting_id"
     t.index ["room_id"], name: "index_dispositions_on_room_id"
   end
@@ -29,6 +31,8 @@ ActiveRecord::Schema.define(version: 2018_06_16_054110) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_painting_kinds_on_deleted_at"
   end
 
   create_table "paintings", force: :cascade do |t|
@@ -37,6 +41,8 @@ ActiveRecord::Schema.define(version: 2018_06_16_054110) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_paintings_on_deleted_at"
     t.index ["painting_kind_id"], name: "index_paintings_on_painting_kind_id"
     t.index ["user_id"], name: "index_paintings_on_user_id"
   end
@@ -45,6 +51,8 @@ ActiveRecord::Schema.define(version: 2018_06_16_054110) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_ranks_on_deleted_at"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -53,6 +61,8 @@ ActiveRecord::Schema.define(version: 2018_06_16_054110) do
     t.float "area"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_rooms_on_deleted_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -67,6 +77,8 @@ ActiveRecord::Schema.define(version: 2018_06_16_054110) do
     t.bigint "rank_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["rank_id"], name: "index_users_on_rank_id"
   end
 

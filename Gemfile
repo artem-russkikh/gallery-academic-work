@@ -41,6 +41,7 @@ gem 'bootstrap-generators', git: 'git://github.com/decioferreira/bootstrap-gener
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
+gem "paranoia", "~> 2.2"
 
 gem 'net-ldap'
 
