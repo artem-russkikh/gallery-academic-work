@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: 'Звания') do |sheet|
+  sheet.add_row ['#', 'Заголовок', 'Дата создания', 'Дата обновления']
+  @ranks.each do |rank|
+    sheet.add_row [rank.id, rank.title, rank.created_at, rank.updated_at]
+  end
+end

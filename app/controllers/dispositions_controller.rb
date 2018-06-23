@@ -7,6 +7,11 @@ class DispositionsController < ApplicationController
   # GET /dispositions.json
   def index
     @dispositions = Disposition.all
+
+    respond_to do |format|
+      format.html { render 'index'  }
+      format.xlsx { render xlsx: 'index', filename: 'dispositions.xlsx' }
+    end
   end
 
   # GET /dispositions/1
@@ -30,7 +35,7 @@ class DispositionsController < ApplicationController
 
     respond_to do |format|
       if @disposition.save
-        format.html { redirect_to @disposition, notice: 'Disposition was successfully created.' }
+        format.html { redirect_to @disposition, notice: 'Размещение было успешно создано.' }
         format.json { render :show, status: :created, location: @disposition }
       else
         format.html { render :new }
@@ -44,7 +49,7 @@ class DispositionsController < ApplicationController
   def update
     respond_to do |format|
       if @disposition.update(disposition_params)
-        format.html { redirect_to @disposition, notice: 'Disposition was successfully updated.' }
+        format.html { redirect_to @disposition, notice: 'Размещение было успешно обновлено.' }
         format.json { render :show, status: :ok, location: @disposition }
       else
         format.html { render :edit }
@@ -58,7 +63,7 @@ class DispositionsController < ApplicationController
   def destroy
     @disposition.destroy
     respond_to do |format|
-      format.html { redirect_to dispositions_url, notice: 'Disposition was successfully destroyed.' }
+      format.html { redirect_to dispositions_url, notice: 'Размещение было успешно удалено.' }
       format.json { head :no_content }
     end
   end

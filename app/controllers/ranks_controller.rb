@@ -5,6 +5,11 @@ class RanksController < ApplicationController
   # GET /ranks.json
   def index
     @ranks = Rank.all
+
+    respond_to do |format|
+      format.html { render 'index'  }
+      format.xlsx { render xlsx: 'index', filename: 'ranks.xlsx' }
+    end
   end
 
   # GET /ranks/1
@@ -28,7 +33,7 @@ class RanksController < ApplicationController
 
     respond_to do |format|
       if @rank.save
-        format.html { redirect_to @rank, notice: 'Rank was successfully created.' }
+        format.html { redirect_to @rank, notice: 'Звание было успешно создано.' }
         format.json { render :show, status: :created, location: @rank }
       else
         format.html { render :new }
@@ -42,7 +47,7 @@ class RanksController < ApplicationController
   def update
     respond_to do |format|
       if @rank.update(rank_params)
-        format.html { redirect_to @rank, notice: 'Rank was successfully updated.' }
+        format.html { redirect_to @rank, notice: 'Звание было успешно обновлено.' }
         format.json { render :show, status: :ok, location: @rank }
       else
         format.html { render :edit }
@@ -56,7 +61,7 @@ class RanksController < ApplicationController
   def destroy
     @rank.destroy
     respond_to do |format|
-      format.html { redirect_to ranks_url, notice: 'Rank was successfully destroyed.' }
+      format.html { redirect_to ranks_url, notice: 'Звание было успешно удалено.' }
       format.json { head :no_content }
     end
   end

@@ -3,6 +3,12 @@
     <span class="glyphicon glyphicon-plus"></span>
     Новая картина
   <% end %>
+
+  <%= link_to paintings_path(format: 'xlsx'), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-export"></span>
+    Экспорт
+  <% end %>
+
   <h1>Просмотр всех картин</h1>
 </div>
 

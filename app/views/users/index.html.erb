@@ -32,7 +32,7 @@
                           <td><%= user.email %></td>
                           <td><%= user.encrypted_password %></td>
                           <td><%= user.ldap_id %></td>
-                          <td><%= user.role %></td>
+                          <td><%= User::ROLE_TRANSLATIONS[user.role.to_sym] %></td>
                           <td><%= user.name %></td>
                           <td><%= user.surname %></td>
                           <td><%= user.middle_name %></td>

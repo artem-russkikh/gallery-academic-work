@@ -21,7 +21,7 @@
   <dd><%= @user.ldap_id %></dd>
 
   <dt>Роль:</dt>
-  <dd><%= @user.role %></dd>
+  <dd><%= User::ROLE_TRANSLATIONS[@user.role.to_sym] %></dd>
 
   <dt>Имя:</dt>
   <dd><%= @user.name %></dd>

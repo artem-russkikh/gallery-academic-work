@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: 'Комнаты') do |sheet|
+  sheet.add_row ['#', 'Заголовок', 'Положение', 'Площадь', 'Дата создания', 'Дата обновления']
+  @rooms.each do |room|
+    sheet.add_row [room.id, room.title, room.position, room.area, room.created_at, room.updated_at]
+  end
+end

@@ -8,6 +8,11 @@ class PaintingsController < ApplicationController
   # GET /paintings.json
   def index
     @paintings = Painting.all
+
+    respond_to do |format|
+      format.html { render 'index'  }
+      format.xlsx { render xlsx: 'index', filename: 'paintings.xlsx' }
+    end
   end
 
   # GET /paintings/1
@@ -31,7 +36,7 @@ class PaintingsController < ApplicationController
 
     respond_to do |format|
       if @painting.save
-        format.html { redirect_to @painting, notice: 'Painting was successfully created.' }
+        format.html { redirect_to @painting, notice: 'Картина была успешно создана.' }
         format.json { render :show, status: :created, location: @painting }
       else
         format.html { render :new }
@@ -45,7 +50,7 @@ class PaintingsController < ApplicationController
   def update
     respond_to do |format|
       if @painting.update(painting_params)
-        format.html { redirect_to @painting, notice: 'Painting was successfully updated.' }
+        format.html { redirect_to @painting, notice: 'Картина была успешно обновлена.' }
         format.json { render :show, status: :ok, location: @painting }
       else
         format.html { render :edit }
@@ -59,7 +64,7 @@ class PaintingsController < ApplicationController
   def destroy
     @painting.destroy
     respond_to do |format|
-      format.html { redirect_to paintings_url, notice: 'Painting was successfully destroyed.' }
+      format.html { redirect_to paintings_url, notice: 'Картина была успешно удалена.' }
       format.json { head :no_content }
     end
   end

@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: 'Картины') do |sheet|
+  sheet.add_row ['#', 'Заголовок', 'Вид картины', 'Изображение', 'Пользователь', 'Дата создания', 'Дата обновления']
+  @paintings.each do |painting|
+    sheet.add_row [painting.id, painting.title, painting.painting_kind&.title, painting.image ? polymorphic_url(painting.image, host: 'localhost') : '', painting.user&.email, painting.created_at, painting.updated_at]
+  end
+end

@@ -5,6 +5,11 @@ class PaintingKindsController < ApplicationController
   # GET /painting_kinds.json
   def index
     @painting_kinds = PaintingKind.all
+
+    respond_to do |format|
+      format.html { render 'index'  }
+      format.xlsx { render xlsx: 'index', filename: 'painting_kinds.xlsx' }
+    end
   end
 
   # GET /painting_kinds/1
@@ -28,7 +33,7 @@ class PaintingKindsController < ApplicationController
 
     respond_to do |format|
       if @painting_kind.save
-        format.html { redirect_to @painting_kind, notice: 'Painting kind was successfully created.' }
+        format.html { redirect_to @painting_kind, notice: 'Вид картины был успешно создан.' }
         format.json { render :show, status: :created, location: @painting_kind }
       else
         format.html { render :new }
@@ -42,7 +47,7 @@ class PaintingKindsController < ApplicationController
   def update
     respond_to do |format|
       if @painting_kind.update(painting_kind_params)
-        format.html { redirect_to @painting_kind, notice: 'Painting kind was successfully updated.' }
+        format.html { redirect_to @painting_kind, notice: 'Вид картины был успешно обновлен.' }
         format.json { render :show, status: :ok, location: @painting_kind }
       else
         format.html { render :edit }
@@ -56,7 +61,7 @@ class PaintingKindsController < ApplicationController
   def destroy
     @painting_kind.destroy
     respond_to do |format|
-      format.html { redirect_to painting_kinds_url, notice: 'Painting kind was successfully destroyed.' }
+      format.html { redirect_to painting_kinds_url, notice: 'Вид картины был успешно удален.' }
       format.json { head :no_content }
     end
   end

@@ -3,6 +3,12 @@
     <span class="glyphicon glyphicon-plus"></span>
     Новое звание
   <% end %>
+
+  <%= link_to ranks_path(format: 'xlsx'), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-export"></span>
+    Экспорт
+  <% end %>
+
   <h1>Просмотр всех званий</h1>
 </div>
 
