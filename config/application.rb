@@ -33,6 +33,8 @@ module Gallery
       g.scaffold_stylesheet false
     end
 
+    config.i18n.default_locale = :ru
+
     config.paths.add File.join("app", "services"), glob: File.join("**", "*.rb")
     config.autoload_paths += Dir[Rails.root.join("app", "services", "*")]
   end

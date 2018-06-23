@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_22_235404) do
+ActiveRecord::Schema.define(version: 2018_06_23_025022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2018_06_22_235404) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.integer "lock_version", default: 0
     t.index ["deleted_at"], name: "index_paintings_on_deleted_at"
     t.index ["painting_kind_id"], name: "index_paintings_on_painting_kind_id"
     t.index ["user_id"], name: "index_paintings_on_user_id"

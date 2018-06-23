@@ -9,6 +9,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  deleted_at       :datetime
+#  lock_version     :integer          default(0)
 #
 # Indexes
 #

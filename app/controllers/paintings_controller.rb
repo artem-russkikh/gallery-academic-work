@@ -3,6 +3,7 @@ class PaintingsController < ApplicationController
   autocomplete :painting_kind, :title
 
   before_action :set_painting, only: [:show, :edit, :update, :destroy]
+  before_action :permission_check, only: [:new, :create, :destroy, :update, :edit]
 
   # GET /paintings
   # GET /paintings.json
@@ -33,6 +34,7 @@ class PaintingsController < ApplicationController
   # POST /paintings.json
   def create
     @painting = Painting.new(painting_params)
+    @painting = current_user.paintings.new(painting_params) if current_user.painter?
 
     respond_to do |format|
       if @painting.save
@@ -57,6 +59,9 @@ class PaintingsController < ApplicationController
         format.json { render json: @painting.errors, status: :unprocessable_entity }
       end
     end
+  rescue ActiveRecord::StaleObjectError
+    flash[:error] = "Другой пользователь применил изменения к данной записи, попробуйте еще раз."
+    render :edit
   end
 
   # DELETE /paintings/1
@@ -70,6 +75,18 @@ class PaintingsController < ApplicationController
   end
 
   private
+    def permission_check
+      return not_authorized! if guest?
+      return true if current_user && current_user.manager?
+      return true if current_user && current_user.admin?
+      return not_authorized! if ['edit', 'update', 'destroy'].include?(action_name) && @painting.user_id != current_user.id
+    end
+
+    def not_authorized!
+      flash[:alert] = 'Вы не авторизованы для этого действия'
+      redirect_back fallback_location: root_url
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_painting
       @painting = Painting.find(params[:id])
@@ -77,6 +94,6 @@ class PaintingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def painting_params
-      params.require(:painting).permit(:title, :painting_kind_id, :user_id, :image)
+      params.require(:painting).permit(:lock_version, :title, :painting_kind_id, :user_id, :image)
     end
 end

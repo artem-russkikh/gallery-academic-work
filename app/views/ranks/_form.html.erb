@@ -2,7 +2,7 @@
   <% if @rank.errors.any? %>
     <div class="alert alert-danger alert-dismissable" role="alert">
       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
-      <h4><%= pluralize(@rank.errors.count, "error") %> prohibited this rank from being saved:</h4>
+      <h4><%= Russian.p(@rank.errors.count, 'ошибка', 'ошибки', 'ошибок') %>:</h4>
 
       <ul>
       <% @rank.errors.full_messages.each do |msg| %>

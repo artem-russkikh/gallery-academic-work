@@ -2,7 +2,7 @@
   <% if @painting_kind.errors.any? %>
     <div class="alert alert-danger alert-dismissable" role="alert">
       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
-      <h4><%= pluralize(@painting_kind.errors.count, "error") %> prohibited this painting_kind from being saved:</h4>
+      <h4><%= Russian.p(@painting_kind.errors.count, 'ошибка', 'ошибки', 'ошибок') %> prohibited this painting_kind from being saved:</h4>
 
       <ul>
       <% @painting_kind.errors.full_messages.each do |msg| %>

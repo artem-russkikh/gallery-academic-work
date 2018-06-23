@@ -2,7 +2,7 @@
   <% if @disposition.errors.any? %>
     <div class="alert alert-danger alert-dismissable" role="alert">
       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
-      <h4><%= pluralize(@disposition.errors.count, "error") %> prohibited this disposition from being saved:</h4>
+      <h4><%= Russian.p(@disposition.errors.count, 'ошибка', 'ошибки', 'ошибок') %>:</h4>
 
       <ul>
       <% @disposition.errors.full_messages.each do |msg| %>
