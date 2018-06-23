@@ -18,7 +18,11 @@
   <dd><%= link_to @painting.painting_kind.title, @painting.painting_kind rescue '' %></dd>
 
   <dt>Изображение:</dt>
-  <dd><%= image_tag @painting.image.variant(resize: "400x400") rescue 'Нет изображения' %></dd>
+  <dd>
+    <%= link_to url_for(@painting.image) do %>
+      <%= image_tag @painting.image.variant(resize: "400x400") rescue 'Нет изображения' %>
+    <% end %>
+  </dd>
 
   <dt>Пользователь:</dt>
   <dd><%= link_to @painting.user.email, @painting.user rescue '' %></dd>
