@@ -23,7 +23,7 @@ class LdapService
 
   # @example
   #   LdapService.new.add(email: 'manager@google.com', password: '12345678', name: 'Bob', surname: 'Bobber', role: 'manager')
-  # @return [TrueClass, FalseClass]
+  # @return [Hash, nil]
   def add(email:, password:, name:, surname:, role:)
     cn = "#{name} #{surname}"
     dn = "cn=#{cn},cn=#{role},ou=user,dc=example,dc=org"
@@ -34,7 +34,7 @@ class LdapService
         attributes: ['uidNumber']
       ).map { |item| item.uidNumber.first.to_i }.max + 1
 
-      ldap_connection.add(dn: dn, attributes: {
+      result = ldap_connection.add(dn: dn, attributes: {
         cn: cn,
         mail: email,
         gidNumber: detect_gidnumber_from_role(role),
@@ -46,6 +46,15 @@ class LdapService
         uid: cn,
         homeDirectory: "/home/users/#{next_uid}"
       })
+
+      if result
+        search_result = ldap_connection.search(
+          base: search_base,
+          filter: "(mail=#{email})",
+          password: password
+        )
+        return format_user(search_result.first) if search_result
+      end
 
       # ldap.get_operation_result.message
     end
@@ -71,8 +80,8 @@ class LdapService
     def format_user(ldap_user)
       {
         email: ldap_user.mail.first,
-        first_name: ldap_user.givenname.first,
-        last_name: ldap_user.sn.first,
+        name: ldap_user.givenname.first,
+        surname: ldap_user.sn.first,
         role: detect_role_from_gidnumber(ldap_user.gidnumber.first),
         ldap_id: ldap_user.uidnumber.first
       }

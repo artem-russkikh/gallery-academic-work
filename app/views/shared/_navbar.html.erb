@@ -35,6 +35,23 @@
           <%= link_to 'Размещения', dispositions_path %>
         </li>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user? %>
+          <li>
+            <%= link_to current_user.email, current_user %>
+          </li>
+          <li>
+            <%= link_to 'Выход', logout_path, method: :delete %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to 'Вход', signin_path %>
+          </li>
+          <li>
+            <%= link_to 'Регистрация', signup_path %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </nav>

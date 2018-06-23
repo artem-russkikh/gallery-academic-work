@@ -21,5 +21,13 @@ Rails.application.routes.draw do
 
   resources :ranks
 
+  get '/signin', to: 'sessions#signin_new'
+  get '/signup', to: 'sessions#signup_new'
+
+  post '/signin', to: 'sessions#signin'
+  post '/signup', to: 'sessions#signup'
+
+  delete '/logout', to: 'sessions#destroy'
+
   root to: 'paintings#index'
 end
