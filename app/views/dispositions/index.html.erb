@@ -1,9 +1,9 @@
 <div class="page-header">
   <%= link_to new_disposition_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
-    Новый Disposition
+    Новое размещение
   <% end %>
-  <h1>Просмотр всех dispositions</h1>
+  <h1>Просмотр всех размещений</h1>
 </div>
 
 <% if @dispositions.exists? %>
@@ -11,9 +11,9 @@
     <table class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
-                <th>Painting</th>
-                <th>Room</th>
-                <th>Reproduction</th>
+                <th>Картина</th>
+                <th>Комната</th>
+                <th>Копия/Оригинал</th>
                 <th></th>
           <th></th>
           <th></th>
@@ -23,9 +23,9 @@
       <tbody>
         <% @dispositions.each do |disposition| %>
           <%= content_tag :tr, id: dom_id(disposition), class: dom_class(disposition) do %>
-                          <td><%= disposition.painting %></td>
-                          <td><%= disposition.room %></td>
-                          <td><%= disposition.reproduction %></td>
+                          <td><%= link_to disposition.painting.title, disposition.painting rescue 'Нет картины' %></td>
+                          <td><%= link_to disposition.room.title, disposition.room rescue 'Нет комнаты' %></td>
+                          <td><%= disposition.reproduction ? 'Копия' : 'Оригинал' %></td>
                         <td><%= link_to 'Просмотр', disposition %></td>
             <td><%= link_to 'Редактировать', edit_disposition_path(disposition) %></td>
             <td><%= link_to 'Удалить', disposition, method: :delete, data: { confirm: 'Вы уверены?' } %></td>

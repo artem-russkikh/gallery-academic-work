@@ -11,13 +11,22 @@
 </div>
 
 <dl class="dl-horizontal">
-  <dt>Painting:</dt>
-  <dd><%= @disposition.painting %></dd>
+  <dt>Картина:</dt>
+  <dd>
+    <% if @disposition.painting && @disposition.painting.image %>
+      <%= link_to @disposition.painting do %>
+        <%= image_tag @disposition.painting.image.variant(resize: "400x400") %>
+      <% end %><br/>
+      <%= link_to @disposition.painting.title, @disposition.painting rescue 'Нет картины' %>
+    <% else %>
+      <%= link_to @disposition.painting.title, @disposition.painting rescue 'Нет картины' %>
+    <% end %>
+  </dd>
 
-  <dt>Room:</dt>
-  <dd><%= @disposition.room %></dd>
+  <dt>Комната:</dt>
+  <dd><%= link_to @disposition.room.title, @disposition.room rescue 'Нет комнаты' %></dd>
 
-  <dt>Reproduction:</dt>
-  <dd><%= @disposition.reproduction %></dd>
+  <dt>Копия/Оригинал:</dt>
+  <dd><%= @disposition.reproduction ? 'Копия' : 'Оригинал' %></dd>
 
 </dl>

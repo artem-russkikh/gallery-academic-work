@@ -1,9 +1,9 @@
 <div class="page-header">
   <%= link_to new_room_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
-    Новый Room
+    Новая комната
   <% end %>
-  <h1>Просмотр всех rooms</h1>
+  <h1>Просмотр всех комнат</h1>
 </div>
 
 <% if @rooms.exists? %>
@@ -12,8 +12,8 @@
       <thead>
         <tr>
                 <th>Заголовок</th>
-                <th>Position</th>
-                <th>Area</th>
+                <th>Положение</th>
+                <th>Площадь</th>
                 <th></th>
           <th></th>
           <th></th>

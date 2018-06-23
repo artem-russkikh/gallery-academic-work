@@ -14,19 +14,19 @@
 
   <div class="form-group">
 
-      <%= f.label :painting, class: "col-sm-2 control-label" %>
+      <%= f.label :painting_title, 'Картина', class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
         <%= f.hidden_field :painting_id %>
-        <%= autocomplete_field_tag 'painting_title', @disposition.painting&.title, autocomplete_painting_title_dispositions_path, id_element: '#disposition_painting_id', class: 'form-control' %>
+        <%= autocomplete_field_tag 'painting_title', @disposition.painting&.title, autocomplete_painting_title_dispositions_path, id_element: '#disposition_painting_id', class: 'form-control', id: 'disposition_painting_title' %>
       </div>
 
   </div>
   <div class="form-group">
 
-      <%= f.label :room, class: "col-sm-2 control-label" %>
+      <%= f.label :room_title, 'Комната', class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
         <%= f.hidden_field :room_id %>
-        <%= autocomplete_field_tag 'room_title', @disposition.room&.title, autocomplete_room_title_dispositions_path, id_element: '#disposition_room_id', class: 'form-control' %>
+        <%= autocomplete_field_tag 'room_title', @disposition.room&.title, autocomplete_room_title_dispositions_path, id_element: '#disposition_room_id', class: 'form-control', id: 'disposition_room_title' %>
       </div>
 
   </div>
@@ -36,7 +36,7 @@
         <div class="checkbox">
           <label>
             <%= f.check_box :reproduction %>
-            Reproduction
+            Копия?
           </label>
         </div>
       </div>
