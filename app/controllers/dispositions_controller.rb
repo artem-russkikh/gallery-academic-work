@@ -7,7 +7,7 @@ class DispositionsController < ApplicationController
   # GET /dispositions
   # GET /dispositions.json
   def index
-    @dispositions = Disposition.all
+    @dispositions = Disposition.all.page(params[:page]).per(20)
 
     respond_to do |format|
       format.html { render 'index'  }

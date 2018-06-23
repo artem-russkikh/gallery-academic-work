@@ -8,7 +8,10 @@ class PaintingsController < ApplicationController
   # GET /paintings
   # GET /paintings.json
   def index
-    @paintings = Painting.all
+    count_estimated = ActiveRecord::Base.connection.execute(%(
+      SELECT reltuples::bigint AS estimate FROM pg_class where relname='paintings';
+    )).to_a[0]['estimate']
+    @paintings = Painting.all.page(params[:page]).with_custom_count(count_estimated).per(20)
 
     respond_to do |format|
       format.html { render 'index'  }

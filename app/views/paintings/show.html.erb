@@ -11,6 +11,9 @@
 </div>
 
 <dl class="dl-horizontal">
+  <dt>#:</dt>
+  <dd><%= @painting.id %></dd>
+
   <dt>Заголовок:</dt>
   <dd><%= @painting.title %></dd>
 
@@ -19,8 +22,10 @@
 
   <dt>Изображение:</dt>
   <dd>
-    <%= link_to url_for(@painting.image) do %>
-      <%= image_tag @painting.image.variant(resize: "400x400") rescue 'Нет изображения' %>
+    <% if @painting.image.attached? %>
+      <%= link_to url_for(@painting.image) do %>
+        <%= image_tag @painting.image.variant(resize: "400x400") rescue 'Нет изображения' %>
+      <% end %>
     <% end %>
   </dd>
 
