@@ -42,6 +42,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
 gem "paranoia", "~> 2.2"
+gem 'mini_magick'
 
 gem 'net-ldap'
 

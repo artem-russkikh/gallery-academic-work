@@ -1,9 +1,9 @@
 <div class="page-header">
   <%= link_to new_user_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
-    Новый User
+    Новый пользователь
   <% end %>
-  <h1>Просмотр всех users</h1>
+  <h1>Просмотр всех пользователей</h1>
 </div>
 
 <% if @users.exists? %>
@@ -12,14 +12,14 @@
       <thead>
         <tr>
                 <th>Email</th>
-                <th>Encrypted password</th>
+                <th>Зашифрованный пароль</th>
                 <th>LDAP ID</th>
-                <th>Role</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Middle name</th>
-                <th>Age</th>
-                <th>Rank</th>
+                <th>Роль</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Отчество</th>
+                <th>Возраст</th>
+                <th>Звание</th>
                 <th></th>
           <th></th>
           <th></th>
@@ -37,7 +37,7 @@
                           <td><%= user.surname %></td>
                           <td><%= user.middle_name %></td>
                           <td><%= user.age %></td>
-                          <td><%= user.rank %></td>
+                          <td><%= link_to user.rank.title, user.rank rescue '' %></td>
                         <td><%= link_to 'Просмотр', user %></td>
             <td><%= link_to 'Редактировать', edit_user_path(user) %></td>
             <td><%= link_to 'Удалить', user, method: :delete, data: { confirm: 'Вы уверены?' } %></td>

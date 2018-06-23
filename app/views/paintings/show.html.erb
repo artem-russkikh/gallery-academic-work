@@ -7,17 +7,20 @@
     <span class="glyphicon glyphicon-pencil"></span>
     Редактировать
   <% end %>
-  <h1>Просмотр painting</h1>
+  <h1>Просмотр картины</h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt>Title:</dt>
+  <dt>Заголовок:</dt>
   <dd><%= @painting.title %></dd>
 
-  <dt>Painting kind:</dt>
-  <dd><%= @painting.painting_kind %></dd>
+  <dt>Вид картины:</dt>
+  <dd><%= link_to @painting.painting_kind.title, @painting.painting_kind rescue '' %></dd>
 
-  <dt>User:</dt>
-  <dd><%= @painting.user %></dd>
+  <dt>Изображение:</dt>
+  <dd><%= image_tag @painting.image.variant(resize: "400x400") rescue 'Нет изображения' %></dd>
+
+  <dt>Пользователь:</dt>
+  <dd><%= link_to @painting.user.email, @painting.user rescue '' %></dd>
 
 </dl>

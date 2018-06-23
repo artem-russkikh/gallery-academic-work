@@ -7,35 +7,35 @@
     <span class="glyphicon glyphicon-pencil"></span>
     Редактировать
   <% end %>
-  <h1>Просмотр user</h1>
+  <h1>Просмотр пользователя</h1>
 </div>
 
 <dl class="dl-horizontal">
   <dt>Email:</dt>
   <dd><%= @user.email %></dd>
 
-  <dt>Encrypted password:</dt>
+  <dt>Зашифрованный пароль:</dt>
   <dd><%= @user.encrypted_password %></dd>
 
   <dt>LDAP ID:</dt>
   <dd><%= @user.ldap_id %></dd>
 
-  <dt>Role:</dt>
+  <dt>Роль:</dt>
   <dd><%= @user.role %></dd>
 
-  <dt>Name:</dt>
+  <dt>Имя:</dt>
   <dd><%= @user.name %></dd>
 
-  <dt>Surname:</dt>
+  <dt>Фамилия:</dt>
   <dd><%= @user.surname %></dd>
 
-  <dt>Middle name:</dt>
+  <dt>Отчество:</dt>
   <dd><%= @user.middle_name %></dd>
 
-  <dt>Age:</dt>
+  <dt>Возраст:</dt>
   <dd><%= @user.age %></dd>
 
-  <dt>Rank:</dt>
-  <dd><%= @user.rank %></dd>
+  <dt>Звание:</dt>
+  <dd><%= link_to @user.rank.title, @user.rank rescue '' %></dd>
 
 </dl>

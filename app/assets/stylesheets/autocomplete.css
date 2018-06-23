@@ -32,6 +32,12 @@
   *border-right-width: 2px;
   *border-bottom-width: 2px;
 }
+
+.ui-autocomplete .ui-menu-item {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .ui-autocomplete .ui-menu-item > a.ui-corner-all {
   display: block;
   padding: 3px 15px;

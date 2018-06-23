@@ -23,6 +23,12 @@
 #
 
 class User < ApplicationRecord
+  ROLE_TRANSLATIONS = {
+    painter: 'художник',
+    manager: 'управляющий',
+    admin: 'администратор'
+  }.freeze
+
   attr_accessor :password
 
   enum role: { painter: 502, manager: 501, admin: 500 }
@@ -31,4 +37,8 @@ class User < ApplicationRecord
 
   belongs_to :rank, optional: true
   has_many :paintings
+
+  def self.roles_translated
+    Hash[roles.map { |k, v| [ROLE_TRANSLATIONS[k.to_sym], v] }]
+  end
 end

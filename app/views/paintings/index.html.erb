@@ -1,9 +1,9 @@
 <div class="page-header">
   <%= link_to new_painting_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
-    Новый Painting
+    Новая картина
   <% end %>
-  <h1>Просмотр всех paintings</h1>
+  <h1>Просмотр всех картин</h1>
 </div>
 
 <% if @paintings.exists? %>
@@ -11,9 +11,9 @@
     <table class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
-                <th>Title</th>
-                <th>Painting kind</th>
-                <th>User</th>
+                <th>Заголовок</th>
+                <th>Вид картины</th>
+                <th>Пользователь</th>
                 <th></th>
           <th></th>
           <th></th>
@@ -24,8 +24,8 @@
         <% @paintings.each do |painting| %>
           <%= content_tag :tr, id: dom_id(painting), class: dom_class(painting) do %>
                           <td><%= painting.title %></td>
-                          <td><%= painting.painting_kind %></td>
-                          <td><%= painting.user %></td>
+                          <td><%= link_to painting.painting_kind.title, painting.painting_kind rescue '' %></td>
+                          <td><%= link_to painting.user.email, painting.user rescue '' %></td>
                         <td><%= link_to 'Просмотр', painting %></td>
             <td><%= link_to 'Редактировать', edit_painting_path(painting) %></td>
             <td><%= link_to 'Удалить', painting, method: :delete, data: { confirm: 'Вы уверены?' } %></td>

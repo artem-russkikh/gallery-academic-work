@@ -14,7 +14,7 @@
 
   <div class="form-group">
 
-      <%= f.label :title, class: "col-sm-2 control-label" %>
+      <%= f.label :title, 'Заголовок', class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
         <%= f.text_field :title, class: "form-control" %>
       </div>
@@ -22,16 +22,26 @@
   </div>
   <div class="form-group">
 
-      <%= f.label :painting_kind, class: "col-sm-2 control-label" %>
+      <%= f.label :painting_kind, 'Вид картины', class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
         <%= f.hidden_field :painting_kind_id %>
         <%= autocomplete_field_tag 'painting_kind_title', @painting.painting_kind&.title, autocomplete_painting_kind_title_paintings_path, id_element: '#painting_painting_kind_id', class: 'form-control' %>
       </div>
 
   </div>
+
   <div class="form-group">
 
-      <%= f.label :user, class: "col-sm-2 control-label" %>
+      <%= f.label :image, 'Изображение', class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.file_field :image, class: "form-control" %>
+      </div>
+
+  </div>
+
+  <div class="form-group">
+
+      <%= f.label :user, 'Пользователь', class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
         <%= f.hidden_field :user_id %>
         <%= autocomplete_field_tag 'user_email', @painting.user&.email, autocomplete_user_email_paintings_path, id_element: '#painting_user_id', class: 'form-control' %>
@@ -40,7 +50,7 @@
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit class: "btn btn-primary" %>
+      <%= f.submit 'Сохранить', class: "btn btn-primary" %>
     </div>
   </div>
 <% end %>
