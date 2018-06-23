@@ -2,6 +2,7 @@ class DispositionsController < ApplicationController
   autocomplete :room, :title
   autocomplete :painting, :title
   before_action :set_disposition, only: [:show, :edit, :update, :destroy]
+  before_action :permission_check, only: [:new, :create, :destroy, :update, :edit]
 
   # GET /dispositions
   # GET /dispositions.json
@@ -69,6 +70,14 @@ class DispositionsController < ApplicationController
   end
 
   private
+
+    def permission_check
+      if guest? || !['admin', 'manager'].include?(current_user.role)
+        flash[:alert] = 'Вы не авторизованы для этого действия'
+        redirect_back fallback_location: root_url
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_disposition
       @disposition = Disposition.find(params[:id])

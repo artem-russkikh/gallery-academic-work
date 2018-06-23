@@ -1,5 +1,6 @@
 class RanksController < ApplicationController
   before_action :set_rank, only: [:show, :edit, :update, :destroy]
+  before_action :permission_check, only: [:new, :create, :destroy, :update, :edit]
 
   # GET /ranks
   # GET /ranks.json
@@ -67,6 +68,12 @@ class RanksController < ApplicationController
   end
 
   private
+    def permission_check
+      if guest? || !['admin', 'manager'].include?(current_user.role)
+        flash[:alert] = 'Вы не авторизованы для этого действия'
+        redirect_back fallback_location: root_url
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_rank
       @rank = Rank.find(params[:id])

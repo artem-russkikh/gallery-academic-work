@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   autocomplete :rank, :title
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :permission_check
 
   # GET /users
   # GET /users.json
@@ -68,6 +69,23 @@ class UsersController < ApplicationController
   end
 
   private
+    def permission_check
+      if guest? || !current_user.admin?
+        if action_name == 'show'
+          if current_user? && params[:id].to_i != current_user.id
+            not_authorized!
+          end
+        else
+          not_authorized!
+        end
+      end
+    end
+
+    def not_authorized!
+      flash[:alert] = 'Вы не авторизованы для этого действия'
+      redirect_back fallback_location: root_url
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
