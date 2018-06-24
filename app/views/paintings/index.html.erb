@@ -12,11 +12,17 @@
   <h1>Просмотр всех картин</h1>
 </div>
 
+<%= form_tag '', method: :get do %>
+  <input type="text" value="<%= params[:user_email] %>" class="form-control" placeholder="Email пользователя" name="user_email">
+  <input type="submit">
+<% end %>
+
 <% if @paintings.exists? %>
   <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
+                <th>#</th>
                 <th>Заголовок</th>
                 <th>Вид картины</th>
                 <th>Пользователь</th>
@@ -29,6 +35,7 @@
       <tbody>
         <% @paintings.each do |painting| %>
           <%= content_tag :tr, id: dom_id(painting), class: dom_class(painting) do %>
+                          <td><%= painting.id %></td>
                           <td><%= painting.title %></td>
                           <td><%= link_to painting.painting_kind.title, painting.painting_kind rescue '' %></td>
                           <td><%= link_to painting.user.email, painting.user rescue '' %></td>

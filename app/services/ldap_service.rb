@@ -9,6 +9,10 @@ class LdapService
     ldap.auth credentials[:login_dn], credentials[:password]
   end
 
+  def self.mutex
+    @@semaphore ||= Mutex.new
+  end
+
   # @example
   #   LdapService.new.auth('manager@google.com', '12345678')
   # @return [Hash, nil]

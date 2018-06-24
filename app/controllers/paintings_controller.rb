@@ -8,14 +8,31 @@ class PaintingsController < ApplicationController
   # GET /paintings
   # GET /paintings.json
   def index
-    count_estimated = ActiveRecord::Base.connection.execute(%(
-      SELECT reltuples::bigint AS estimate FROM pg_class where relname='paintings';
-    )).to_a[0]['estimate']
-    @paintings = Painting.all.page(params[:page]).with_custom_count(count_estimated).per(20)
+    if params[:user_email]
+      # filtering by email
+
+      @paintings = Painting.none
+      user_id = User.where('lower(email) LIKE ?', params[:user_email].downcase).first&.id
+      @paintings = Painting.order(:id).where(
+        user_id: user_id
+      ).page(params[:page]).per(params[:per_page] || 20) if user_id.present?
+    else
+      # show all record with estimated count for pagination
+
+      count_estimated = ActiveRecord::Base.connection.execute(%(
+        SELECT reltuples::bigint AS estimate FROM pg_class where relname='paintings';
+      )).to_a[0]['estimate']
+      @paintings = Painting.order(:id).all.page(params[:page]).with_custom_count(count_estimated).per(params[:per_page] || 20)
+    end
 
     respond_to do |format|
       format.html { render 'index'  }
-      format.xlsx { render xlsx: 'index', filename: 'paintings.xlsx' }
+      format.xlsx do
+        render xlsx: 'index', filename: 'paintings.xlsx'
+        Dir.glob("#{Rails.root.join('tmp', 'storage')}/painting_attached_image.*").each do |file|
+          File.delete(file) if File.exists?(file)
+        end
+      end
     end
   end
 

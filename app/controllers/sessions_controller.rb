@@ -22,19 +22,21 @@ class SessionsController < ApplicationController
   # ensure that user is not found in LDAP directory and create it by ldap_id
   def signup
     return set_session_user_id!(nil, 'Введите данные.') { render :signup_new } if params_valid?(:signup)
-    ldap_result = LdapService.new.add(
-      email: params[:email],
-      password: params[:password],
-      name: params[:name],
-      surname: params[:surname],
-      role: 'painter'
-    )
-    return set_session_user_id!(nil, 'Невозможно зарегистрироваться.') { render :signup_new } if ldap_result.blank?
-    user = User.find_by(ldap_id: ldap_result[:ldap_id])
-    return set_session_user_id!(user.id, 'Вы вошли!') { redirect_to root_url } if user.present?
-    user = User.new(ldap_result)
-    return set_session_user_id!(user.id, 'Вы вошли!') { redirect_to root_url }  if user.save
-    set_session_user_id!(nil, 'Возникли проблемы. Попробуйте еще раз.') { render :signup_new }
+    LdapService.mutex.synchronize do
+      ldap_result = LdapService.new.add(
+        email: params[:email],
+        password: params[:password],
+        name: params[:name],
+        surname: params[:surname],
+        role: 'painter'
+      )
+      return set_session_user_id!(nil, 'Невозможно зарегистрироваться.') { render :signup_new } if ldap_result.blank?
+      user = User.find_by(ldap_id: ldap_result[:ldap_id])
+      return set_session_user_id!(user.id, 'Вы вошли!') { redirect_to root_url } if user.present?
+      user = User.new(ldap_result)
+      return set_session_user_id!(user.id, 'Вы вошли!') { redirect_to root_url }  if user.save
+      set_session_user_id!(nil, 'Возникли проблемы. Попробуйте еще раз.') { render :signup_new }
+    end
   end
 
   def destroy

@@ -1,7 +1,20 @@
 wb = xlsx_package.workbook
+
 wb.add_worksheet(name: 'Картины') do |sheet|
-  sheet.add_row ['#', 'Заголовок', 'Вид картины', 'Изображение', 'Пользователь', 'Дата создания', 'Дата обновления']
-  @paintings.each do |painting|
-    sheet.add_row [painting.id, painting.title, painting.painting_kind&.title, painting.image.attached? ? polymorphic_url(painting.image, host: 'localhost') : '', painting.user&.email, painting.created_at, painting.updated_at]
+  sheet.add_row ['#', 'Заголовок', 'Вид картины', 'Изображение', 'Ссылка на изображение', 'Пользователь', 'Дата создания', 'Дата обновления']
+  @paintings.each_with_index do |painting, idx|
+    img_link = ''
+    if painting.image.attached?
+      img_link = polymorphic_url(painting.image, host: 'localhost')
+      file_path = Rails.root.join('tmp', 'storage', "painting_attached_image.#{ painting.image.blob.filename.extension }").to_s
+      File.open(file_path, 'wb') do |f|
+        f.write painting.image.download
+      end
+      sheet.add_image(image_src: file_path, noSelect: false, noMove: false, end_at: true) do |image|
+        image.start_at 3, idx + 1
+        image.end_at 4, idx + 1 + 1
+      end
+    end
+    sheet.add_row [painting.id, painting.title, painting.painting_kind&.title, '', img_link, painting.user&.email, painting.created_at, painting.updated_at], height: 60
   end
 end

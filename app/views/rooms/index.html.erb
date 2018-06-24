@@ -17,6 +17,7 @@
     <table class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
+                <th>#</th>
                 <th>Заголовок</th>
                 <th>Положение</th>
                 <th>Площадь</th>
@@ -29,6 +30,7 @@
       <tbody>
         <% @rooms.each do |room| %>
           <%= content_tag :tr, id: dom_id(room), class: dom_class(room) do %>
+                          <td><%= room.id %></td>
                           <td><%= room.title %></td>
                           <td><%= room.position %></td>
                           <td><%= room.area %></td>
